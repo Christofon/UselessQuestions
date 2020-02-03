@@ -15,7 +15,7 @@
 3. Answer questions
     checks if max vote is reached
     sends transaction to answer question
-        Parameter: index of answer
+        Parameter: index of answer  
     Contract stores answerers address
     Icrements vote counter 
 
