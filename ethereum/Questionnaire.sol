@@ -17,7 +17,7 @@ contract Questionnaire {
     }
 
     ///return all answers at once
-    function getDeployedCampaigns() public view returns (bytes[]) {
+    function getQuestions() public view returns (bytes[]) {
         return answers;
     }
 
