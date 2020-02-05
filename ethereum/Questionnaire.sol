@@ -49,6 +49,7 @@ contract Questionnaire {
             //when contract balance > 0.01 ETH
             if(this.balance >= 10000000000000000) {
                 //IMPLEMENT METHOD TO DISTRIBUTE CONTRACT FUNDS TO ARRAY VOTERS
+                //function should consider transaction cost ie. should not send full balance
                 selfdestruct()
             }
         //else just selfdestruct 
