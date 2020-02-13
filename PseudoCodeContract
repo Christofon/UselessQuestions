@@ -1,0 +1,37 @@
+contract Question {
+  
+  string question;
+  string[] answers; // max 10 Antworten
+  uint[] votes; //speichert an der entsprechenden Stelle die Anzahl der Votes ==> votes[0] = Anzahl Votes für Antwort1 (answers[0])
+  uint maxVotes; // bei Erreichen der maxVotes wird ausgezahlt
+  uint timer; // wird schwierig
+  
+  
+  
+  //constructor
+  function Question(string question, string[] answers, uint maxVotes, uint timer) public {
+    question = question;
+    answers = answers;
+    maxVotes = maxVotes;
+  }
+  
+  Getter-Funktionen für
+    - question
+    - answers // nicht möglich (weil String[] == Nested Array)
+    - votes
+   
+  
+  function maxVotesReached () private {
+    uint voteCount;
+    for-Schleife iteriert über votes[] {
+      voteCount += votes[i];
+    }
+    if voteCount >= maxVotes return true;
+    else return false;
+  }
+  
+  
+  function withinTime ?
+  
+  
+}
