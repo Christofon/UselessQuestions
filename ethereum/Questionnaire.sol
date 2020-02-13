@@ -1,4 +1,4 @@
-pragma solidity ^0.6.1
+pragma solidity ^0.5.10
 
 contract Questionnaire {
     string question;
@@ -10,6 +10,8 @@ contract Questionnaire {
     uint gvote;
     //to count votes on answers
     mapping(string => uint) votes;
+    //variable for rewards
+    uint reward;
     
     //THIS MUST BE REWORKED, ITERATION IS A BAD THING IN THIS WORLD :D
     //list of voting addresses
@@ -28,11 +30,17 @@ contract Questionnaire {
         return answers;
     }
 
-    function sendFunds(address[] payable _to) public payable {
-        //sending transaction
-        //call returns a boolean value indicating success or failure
-        (bool sent, bytes memory data) = _to.call.value(msg.value)("");
-        require(sent, "Failed to send Ether");
+    //spliting the funds and
+    //sending transaction to list of voters
+    //call returns a boolean value indicating success or failure
+    function sendFunds() public returns(bool success) {
+        reward = this.balance - 1000000000000000;
+        reward = reward / voters.length;
+
+        for (i=0; i<voters.length; i++) {
+            voters[i].transfer(reward); 
+        }
+        return true;
     }
 
     function vote(string voting) public {
@@ -48,8 +56,8 @@ contract Questionnaire {
         if(gvote == max_votes) {
             //when contract balance > 0.01 ETH
             if(this.balance >= 10000000000000000) {
-                //IMPLEMENT METHOD TO DISTRIBUTE CONTRACT FUNDS TO ARRAY VOTERS
-                //function should consider transaction cost ie. should not send full balance
+                sendFunds()
+
                 selfdestruct()
             }
         //else just selfdestruct 
