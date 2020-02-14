@@ -15,7 +15,7 @@ contract Question {
     maxVotes = maxVotes;
   }
   
-  Getter-Funktionen für
+  Getter-Funktionen für // braucht man nicht 
     - question
     - answers // nicht möglich (weil String[] == Nested Array)
     - votes
