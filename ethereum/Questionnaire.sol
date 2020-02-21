@@ -1,12 +1,11 @@
-pragma solidity ^0.5.10
-aefwqfesfw
+pragma solidity ^0.5.10;
 
 contract Questionnaire {
     string question;
     //array of strings with variable size
     bytes[] answers;
     //lets go with only this to keep it as simple as possible in the first place
-    uint max_votes;
+    // uint max_votes;
     //general vote count
     uint gvote;
     //to count votes on answers
@@ -20,21 +19,21 @@ contract Questionnaire {
     mapping(address => bool) voted;
 
     //constructor function
-    function Questionnaire(string question, bytes[] answers, uint max_votes) public {
+    constructor(string memory question, bytes[] memory answers, uint max_votes) public {
         question = question;
         answers = answers;
         max_votes = max_votes;
     }
 
     //return all answers at once
-    function getAnswers() public view returns (bytes[]) {
+    function getAnswers() public view returns (bytes[] memory) {
         return answers;
     }
 
     //spliting the funds and
     //sending transaction to list of voters
     //call returns a boolean value indicating success or failure
-    function sendFunds() public returns(bool success) {
+    function sendFunds() internal returns(bool success) {
         reward = this.balance - 1000000000000000;
         reward = reward / voters.length;
 
@@ -44,7 +43,7 @@ contract Questionnaire {
         return true;
     }
 
-    function vote(string voting) public {
+    function vote(string memory voting) public {
         //not voted before and increment variables
         require(!voted[msg.sender]);
         votes[voting] += 1;
@@ -57,14 +56,12 @@ contract Questionnaire {
         if(gvote == max_votes) {
             //when contract balance > 0.01 ETH
             if(this.balance >= 10000000000000000) {
-                sendFunds()
+                sendFunds();
 
-                selfdestruct()
+                selfdestruct();
             }
-        //else just selfdestruct 
-        }
-
-
+            selfdestruct();
+            
+        } 
     }
-
 }
